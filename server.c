@@ -1,36 +1,85 @@
+
+
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/socket.h>
 #include <sys/types.h>
+#include <sys/socket.h>
 #include <netinet/in.h>
-#include <arpa/inet.h>
-
-void main(int argc, char **argv){
-   if(argc != 2){
-          printf("Usage: %s <ports>\n", argv[0]);
-          exit(0);
-       }
-
-      int port = atoi(argv[1]);
-      int sockfd;
-      struct sockaddr_in serverAddr;
-      char buffer[1024];
-      socklen_t addr_size;
-
-      sockfd=socket(PF_INET, SOCK_DGRAM, 0);
-      memset(&serverAddr, '\0', sizeof(serverAddr));
-
-      serverAddr.sin_family=AF_INET;
-      serverAddr.sin_port=htons(port);
-      serverAddr.sin_addr.s_addr=inet_addr("127.0.0.1");
-
-      strcpy(buffer, "Hello Server\n");
-      sendto(sockfd, buffer, 1024, 0, (struct sockaddr*)&serverAddr, sizeof(serverAddr));
-      printf("[+]Data Send: %s", buffer); 
-
-      addr_size=sizeof(serverAddr);
-      recvfrom(sockfd, buffer, 1024, 0, (struct sockaddr*)&serverAddr, &addr_size);
-      printf("[+]Data Received: %s", buffer);
-
+#include <stdlib.h>
+#include <unistd.h>
+#include <strings.h>
+void error(char *msg)
+{
+perror(msg);
+exit(1);
 }
+
+int main(int argc, char *argv[])
+{
+
+int sockfd, newsockfd, portno, clilen;
+char buffer[256];
+struct sockaddr_in serv_addr, cli_addr;
+int n;
+
+if (argc < 2)
+{
+fprintf(stderr,"ERROR, no port provided\n");
+exit(1);
+}
+
+sockfd = socket(AF_INET, SOCK_STREAM, 0);
+
+if (sockfd < 0)
+{
+error("ERROR opening socket");
+}
+
+bzero((char *) &serv_addr, sizeof(serv_addr));
+
+portno = atoi(argv[1]);
+
+serv_addr.sin_family = AF_INET;
+serv_addr.sin_addr.s_addr = INADDR_ANY;
+serv_addr.sin_port = htons(portno);
+
+if (bind(sockfd, (struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0)
+{
+error("ERROR on binding");
+}
+
+listen(sockfd,5);
+clilen = sizeof(cli_addr);
+
+newsockfd = accept(sockfd,(struct sockaddr *) &cli_addr, &clilen);
+
+if (newsockfd < 0)
+{
+error("ERROR on accept");
+}
+
+bzero(buffer,256);
+FILE *fp;
+  read(newsockfd,buffer,100);
+  fp=fopen("add1.txt","w");
+  fprintf(fp,"%s",buffer);
+  printf("the file was received successfully....\n");
+  printf("the new file created is add1.txt....\n");
+
+/*n = read(newsockfd,buffer,255);
+
+if (n < 0)
+{
+error("ERROR reading from socket");
+}
+
+printf("Here is the message: %s\n",buffer);
+
+n = write(newsockfd,"I got your message",18);
+
+if (n < 0)
+{
+error("ERROR writing to socket");
+}*/
+return 0;
+}
+
