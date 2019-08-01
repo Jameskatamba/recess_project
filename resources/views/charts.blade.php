@@ -22,6 +22,7 @@
 
         <!-- Begin Page Content -->
         @section('content')
+        
         <div class="container-fluid">
 
           <!-- Page Heading -->
@@ -46,30 +47,14 @@
                  </div>
               </div>
 
-              <!-- Bar Chart -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
-                </div>
-                <div class="card-body">
-                  <div class="chart-bar">
-                    <canvas id="myBarChart"></canvas>
-                  </div>
-                  <hr>
-                  
                 </div>
               </div>
 
             </div>
 
-            <!-- Donut Chart -->
             <div class="col-xl-4 col-lg-5">
               <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-               
-                <!-- Card Body -->
                 
-                  
                 </div>
               </div>
             </div>

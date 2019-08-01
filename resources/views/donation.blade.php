@@ -1,5 +1,6 @@
 @extends('layouts.form2')
 @section('content')
+
 <body class="card-body">
   <div class="container">
  <div class="card o-hidden border-0 shadow-lg my-5">

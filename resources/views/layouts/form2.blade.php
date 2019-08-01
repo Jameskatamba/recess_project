@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+  <script type="text/css" media="print">
+
+    body{visibility:hidden;}
+    .print{visibility:visible;}
+    
+  </script>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,12 +30,32 @@
 
   @if (session()->has('success'))
   <center>
-     <div class="alert alert-success" id="popup_notification">
+     <div class="alert alert-success" id="popup_notification" class="pri">
         {{ session('success') }}
     </div>
   </center>
    
 @endif
+
+ @if (session()->has('error'))
+  <center>
+     <div class="alert alert-danger" id="popup_notification" class="pri">
+        {{ session('error') }}
+    </div>
+  </center>
+   
+@endif
+
+
+@if (session()->has('info'))
+  <center>
+     <div class="alert alert-info" id="popup_notification" class="pri">
+        {{ session('info') }}
+    </div>
+  </center>
+   
+@endif
+
 
   <!-- Page Wrapper -->
   <div id="wrapper" class="container-fluid">
@@ -169,6 +195,12 @@
           </div>
         </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="high" >
+          <i class="fas fa-fw fa-table"></i>
+          <span>AGENT HIERRACHIES</span></a>
+      </li>
+
 
 
 
@@ -246,9 +278,19 @@
 
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800"></h1>
+
          
         </div>
-       @yield('content')
+        <center>
+      
+          <button type="button" class="btn btn-primary btn-sm ">
+            <span class=""></span class="glyphicon glyphicon-print"> <a  onclick="window.print();return false;">Print page </a>
+          </button>
+       
+
+        </center>
+         
+         @yield('content')
 
       </div>
       <!-- End of Main Content -->

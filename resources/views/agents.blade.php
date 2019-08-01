@@ -16,6 +16,7 @@
 @extends('layouts.form2')
 @section('content')
 
+
 <body id="page-top">
 
         <!-- End of Topbar -->
@@ -24,18 +25,16 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">All {{config('app.name')}} tables</h1>
-          <p class="mb-4">This table shows the available agents.</p>
-
+          <h1 class="h3 mb-5 text-gray-800">All {{config('app.name')}} tables</h1>
           <!-- DataTales Example -->
-          <div class="card shadow mb-4">
+          <div class="card shadow mb-8">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">All agents tables </h6>
+              <h6 class="m-6 font-weight-bold text-primary">All agents tables </h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
              
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="5">
                   <thead>
                     <tr>
                       <th>Agent id</th>
@@ -90,16 +89,6 @@
 
   </div>
 
-
-
-
-
-
-  <!-- End of Page Wrapper -->
-
-  <!-- Scroll to Top Button-->
-
- 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

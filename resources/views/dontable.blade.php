@@ -15,6 +15,7 @@
 </head>
 @extends('layouts.form2')
 @section('content')
+<hr>
 
 <body id="page-top">
 
@@ -24,13 +25,11 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">All {{config('app.name')}} tables</h1>
-          <p class="mb-4">This table show all our donations and the donor's names.</p>
-
+          
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Donations tables </h6>
+              <h6 class="m-0 font-weight-bold text-primary">Donations or funds table </h6>
                                        
             </div>
             <div class="card-body">

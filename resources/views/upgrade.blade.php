@@ -1,3 +1,4 @@
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,59 +16,54 @@
 </head>
 @extends('layouts.form2')
 @section('content')
-<hr>
 
 <body id="page-top">
+
+        <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-        
+          <!-- Page Heading -->
+          <hr>
+          <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Payments Table </h6>
-                                       
+              <h6 class="m-0 font-weight-bold text-primary">upgrade  requsest </h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
-
              
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  
+                  <thead>
+                    <tr>
+                      <th>Person/ Recommender's name</th>
+                      <th>Your decission</th>
+                      
+                      
+                      </tr>
+                  </thead>
                   <tfoot>
-                   @foreach($data as $value)
-                   <tr>
-                      <th>Total  amount in treasury </th>
-                      <th>UGshs: {{2000000+$value-> payable}}</th>
-                       </tr>
-                   <tr>
-                      <th>payable amount </th>
-                      <th>UGshs: {{$value-> payable}}</th>
-                       </tr>
-                       <tr>
-                      <th>payment for plain agents </th>
-                      <td>UGshs: {{$value-> plainAgents}}</td>
-                       </tr>
-                       <tr>
-                      <th>payment for plain agentheads </th>
-                      <td>UGshs: {{$value-> AgentsHeadOfPlain}}</td>
-                       </tr>
-                       <tr>
-                      <th>Agent heads of high district </th>
-                      <td>UGshs: {{$value-> AgentsHeadOfHigh}}</td>
-                       </tr>
-                       <tr>
-                      <th>Payment for Admin </th>
-                      <td>UGshs: {{$value-> Admin}}</td>
-                       </tr>
-                   
-                     @endforeach
-                  </tfoot>
                   
+                      <tr>
+                      <th>Person/ Recommender's name</th>
+                      <th>Your decission</th>
+
+                      
+                      </tr>
+                  </tfoot>
+                  <tbody>
+                     @foreach($data as $value)
+                    <tr>
+                     <td>{{$value ->recommendername}}</td>
+                    <td><a href="registerAgent"><button  class ="btn btn-danger"> Upgrade Now</button></a>
+           </td>
+                    </tr>
+                 @endforeach
+                   </tbody>
                 </table>
           
               </div>
-              <hr>
             </div>
           </div>
 
@@ -83,15 +79,17 @@
     <!-- End of Content Wrapper -->
 
   </div>
+ 
 
-
-
-
-
-
+<?
+include('dontable.blade.php');
+?>
   <!-- End of Page Wrapper -->
 
   <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
 
  
   <!-- Bootstrap core JavaScript-->

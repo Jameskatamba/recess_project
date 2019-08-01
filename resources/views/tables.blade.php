@@ -16,7 +16,7 @@
 </head>
 @extends('layouts.form2')
 @section('content')
-
+<hr>
 <body id="page-top">
 
         <!-- End of Topbar -->
@@ -25,9 +25,7 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">All {{config('app.name')}} tables</h1>
-          <p class="mb-4">This table shows the districts  the registered districts we have .</p>
-
+          
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">

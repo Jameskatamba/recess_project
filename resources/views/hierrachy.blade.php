@@ -22,52 +22,46 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-        
+          <!-- Page Heading -->
+          
+          <p class="mb-4">Hirrachies for all Districts </p>
+
+          <!-- DataTales Example -->
           <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Payments Table </h6>
-                                       
-            </div>
+            
             <div class="card-body">
               <div class="table-responsive">
+                @foreach($data as $value)
+                <center>
+                  <hr>
+                
+                  <label>  <button type="button" class="btn btn-info  btn-lg">Hierrachy for {{$value->districtName}}</button></label>
+                  <hr>
+               <label>  <button type="button" class="btn btn-danger btn-lg">{{$value->firstName}}  {{$value->LastName}}</button></label>
+               <br>^<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>
+           
+             <label>   <a href="agents"><button type="button" class="btn btn-warning btn-lg">Other Agents</button></a></label><br>^<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>
+                
+           
+                <label>  <button type="button" class="btn btn-primary  btn-lg">Members</button></label>
+                
+                @endforeach
+
+               <hr>
+                
+                </center>
+                <p>KEY :</p>
+               <label>  <button type="button" class="btn btn-info">District Name</button></label>
+                <br>
+                <label>  <button type="button" class="btn btn-danger">Agent Head</button></label>
+                <br>
+                <a href="agents"><button type="button" class="btn btn-warning">Other Agents</button></a> 
+                <br>
+                 
+                <button type="button" class="btn btn-primary">Members</button>
 
              
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  
-                  <tfoot>
-                   @foreach($data as $value)
-                   <tr>
-                      <th>Total  amount in treasury </th>
-                      <th>UGshs: {{2000000+$value-> payable}}</th>
-                       </tr>
-                   <tr>
-                      <th>payable amount </th>
-                      <th>UGshs: {{$value-> payable}}</th>
-                       </tr>
-                       <tr>
-                      <th>payment for plain agents </th>
-                      <td>UGshs: {{$value-> plainAgents}}</td>
-                       </tr>
-                       <tr>
-                      <th>payment for plain agentheads </th>
-                      <td>UGshs: {{$value-> AgentsHeadOfPlain}}</td>
-                       </tr>
-                       <tr>
-                      <th>Agent heads of high district </th>
-                      <td>UGshs: {{$value-> AgentsHeadOfHigh}}</td>
-                       </tr>
-                       <tr>
-                      <th>Payment for Admin </th>
-                      <td>UGshs: {{$value-> Admin}}</td>
-                       </tr>
-                   
-                     @endforeach
-                  </tfoot>
-                  
-                </table>
-          
               </div>
-              <hr>
             </div>
           </div>
 

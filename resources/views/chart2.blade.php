@@ -22,6 +22,7 @@
 
         <!-- Begin Page Content -->
         @section('content')
+        
         <div class="container-fluid">
 
           <!-- Page Heading -->
@@ -113,7 +114,7 @@
   <!-- Page level custom scripts -->
   <script type="text/javascript">
 // Set new default font family and font color to mimic Bootstrap's default styling
-var  url="{{url("/chart3")}}";
+var  url="{{url("/hig")}}";
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
@@ -144,24 +145,35 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 
 var Years = new Array();
+       var another=new Array();
         var Labels = new Array();
         var Prices = new Array();
         $(document).ready(function(){
           $.get(url, function(response){
             response.forEach(function(data){
 
-                Years.push(data.months);
-                Prices.push(data.total);
+                Years.push(data.total);
+
+                
+
+              for (var i; i <= Years.length; i++) {
+
+                another[i]=((Years[i+1]-Years[i])/Years[i])*100;
+
+              }
+
+
+                Prices.push(data.date);
             });
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
-  data: {
-    labels: ["jan","feb","mar","apr","May","jun","jUl"],
+  data: { another,
+    labels: Prices,
     datasets: [{
-      label: "Percentage chage in enrollment",
+      label: "Percentage change in enrollment",
       lineTension: 0.4,
       backgroundColor: "rgba(78, 115, 223, 0.05)",
       borderColor: "rgba(78, 115, 223, 1)",
@@ -173,7 +185,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: Prices,
+      data: another,
     }],
   },
   options: {
