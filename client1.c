@@ -30,17 +30,15 @@ int getDataSocket(int *s);
 /* List of all global variables */
 
 char userCmd[1024];
+char name[1024];
+char Sign[1024];
 char cmd[1024];
 char argument[1024];
 char replyMsg[4096];
 char *space = " ";
 
 
-int main(
-	int argc,
-	char *argv[]
-	)
-{
+int main(	int argc,	char *argv[]){
 	/* List of local varibale */
 
 	int ccSocket;
@@ -56,65 +54,31 @@ int main(
 		printf("Connection to server failed, exiting main. \n");
 		return (status);
 	}
+	printf("enter name :");
+	fgets(name, sizeof(name), stdin);
+	status = sendMessage(ccSocket, name, strlen(name)+1);
+	printf("signature :");
+	fgets(Sign, sizeof(Sign), stdin);
+	status = sendMessage(ccSocket, Sign, strlen(Sign)+1);
 
+	status = receiveMessage(ccSocket, replyMsg, sizeof(replyMsg), &msgSize);
+	if(strcmp(replyMsg, "wrong info") ==0){
+		printf("please run the program again and provide right information\n");
+	}else{
 	do
 	{
-		printf("my ftp> ");
+		printf("-:");
 		fgets(userCmd, sizeof(userCmd), stdin);
 		status = sendMessage(ccSocket, userCmd, strlen(userCmd)+1);
 		if(status != OK)
 		{
 		    break;
 		}
-    if(strstr(userCmd, " ")!=NULL) {
-      strcpy(cmd, strtok(userCmd, " "));
-      strcpy(argument, strtok(NULL, " "));
-      if(strcmp("put", cmd)==0) {
-        FILE *afile;
-        char buff[201];
-        int numberoffrigginbytes=0;
-        int data_socket;
-        status = getDataSocket(&data_socket);
-        if(status!=OK) printf("no");
-        data_socket=accept(data_socket, NULL, NULL);
-        afile=fopen(argument, "r");
-        if(afile!=NULL) {
-          while(!feof(afile)) {
-            numberoffrigginbytes=fread(buff, sizeof(char), 200, afile);
-            status = sendMessage(data_socket, buff, strlen(buff)+1);
-            if(status!=OK) break;
-          }
-          memset(buff, '\0', sizeof(buff));
-          fclose(afile);
-          close(data_socket);
-        }
-      }
-      else if(strcmp("recv", cmd)==0) {
-        char buff[201];
-        int s;
-        status=dataConnect("127.0.0.1", &s);
-        if(status!=OK) printf("error at dataConnect");
-        s=accept(s, NULL, NULL);
-        FILE *newfile=fopen(argument, "w");
-        while(1) {
-          status=receiveMessage(s,buff,sizeof(buff), &msgSize);
-          if(status!=OK || msgSize ==0) break;
-          fwrite(buff, sizeof(char), msgSize, newfile);
-          fflush(newfile);
-        }
-        fclose(newfile);
-        close(s);
-      }
-    }
 
-		/* Receive reply message from the the server */
-		status = receiveMessage(ccSocket, replyMsg, sizeof(replyMsg), &msgSize);
-		if(status != OK)
-		{
-		    break;
-		}
+		
+
 	}
-	while (strcmp(userCmd, "quit") != 0);
+	while (strcmp(userCmd, "logout") != 0);
 
 	printf("Closing control connection \n");
 	close(ccSocket);  /* close control connection socket */
@@ -122,7 +86,7 @@ int main(
 	printf("Exiting client main \n");
 
 	return (status);
-
+  }
 }
 
 int dataConnect (
